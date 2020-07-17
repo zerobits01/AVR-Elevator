@@ -24,6 +24,7 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+<<<<<<< HEAD
 #include <util/delay.h>
 #include <stdlib.h>
 
@@ -108,6 +109,8 @@ struct QNode* deQueue(struct Queue* q)
 	return temp;
 }
 
+=======
+>>>>>>> parent of a3a60b7... added queue structure
 
 char containsInQueue(char ind){
 	
@@ -129,6 +132,7 @@ char containsInQueue(char ind){
 	return 0;
 }
 
+<<<<<<< HEAD
 
 char queueIsEmpty(struct Queue* q){
 	if(q->front->next == NULL)
@@ -140,6 +144,19 @@ char queueIsEmpty(struct Queue* q){
 
 // define ISRs here
 // ISR for blinking seven segment
+=======
+// define global variables here
+// common cathode
+const char sevseg[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};// now i use common cathode because i wanna isolate pin7
+char floor_number = 1; // 0 1 2 3
+char next_floor = 1;
+char flg;
+// define ISRs here
+// i have to define int0 to rising edge
+// also in the ISR checking that which button has been choice from the port B
+
+// ISR
+>>>>>>> parent of a3a60b7... added queue structure
 ISR (TIMER0_OVF_vect)
 {
 	if(flg){
@@ -151,8 +168,11 @@ ISR (TIMER0_OVF_vect)
 	}
 }
 
+<<<<<<< HEAD
 
 // ISR for floor detection
+=======
+>>>>>>> parent of a3a60b7... added queue structure
 ISR (INT1_vect)
 {
 	switch(PINA){
@@ -176,15 +196,16 @@ ISR (INT1_vect)
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
+<<<<<<< HEAD
 	if(flg0 == 0){
 		_delay_ms(5000);
 		flg0 = 1;
 		// here i have to check if queue is not empty setting a flag and doing int0 agian based on the flg0
 	}
+=======
+>>>>>>> parent of a3a60b7... added queue structure
 }
 
-
-// ISR for buttons detection
 ISR (INT0_vect)
 {
 	switch(PINB){
@@ -192,7 +213,7 @@ ISR (INT0_vect)
 			next_floor = 1;
 		}	break;
 		case 0b11111101 :{
-			next_floor = 2;
+			next_floor = 2;			
 		}	break;
 		case 0b11111011 :{
 			next_floor = 3;
@@ -213,7 +234,10 @@ ISR (INT0_vect)
 			next_floor = 4;
 		}	break;		
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> parent of a3a60b7... added queue structure
 	if(floor_number < next_floor){
 		PORTD = 0x01;
 		PORTD |= 0xF0; // closing all the doors
@@ -252,9 +276,12 @@ void setup(){
 	sei(); // enabling global interrupt	
 	
 	PORTC = sevseg[next_floor];
+<<<<<<< HEAD
 	
 	flg0 = 1;
 	q = createQueue();
+=======
+>>>>>>> parent of a3a60b7... added queue structure
 }
 
 
