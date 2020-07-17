@@ -33,11 +33,24 @@ struct QNode {
 	struct QNode* next;
 };
 
+
 // The queue, front stores the front node of LL and rear stores the
 // last node of LL
 struct Queue {
 	struct QNode *front, *rear;
 };
+
+
+// define global variables here
+// common cathode
+const char sevseg[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};// now i use common cathode because i wanna isolate pin7
+
+char floor_number = 1; // 0 1 2 3
+char next_floor = 1;
+struct Queue* q;
+
+char flg, flg0;
+
 
 // A utility function to create a new linked list node.
 struct QNode* newNode(int k)
@@ -48,6 +61,7 @@ struct QNode* newNode(int k)
 	return temp;
 }
 
+
 // A utility function to create an empty queue
 struct Queue* createQueue()
 {
@@ -55,6 +69,7 @@ struct Queue* createQueue()
 	q->front = q->rear = NULL;
 	return q;
 }
+
 
 // The function to add a key k to q
 void enQueue(struct Queue* q, int k)
@@ -73,12 +88,13 @@ void enQueue(struct Queue* q, int k)
 	q->rear = temp;
 }
 
+
 // Function to remove a key from given queue q
-void deQueue(struct Queue* q)
+struct QNode* deQueue(struct Queue* q)
 {
 	// If queue is empty, return NULL.
 	if (q->front == NULL)
-	return;
+		return;
 	
 	// Store previous front and move front one node ahead
 	struct QNode* temp = q->front;
@@ -89,24 +105,40 @@ void deQueue(struct Queue* q)
 	if (q->front == NULL)
 	q->rear = NULL;
 	
-	free(temp);
+	return temp;
 }
 
 
+char containsInQueue(char ind){
+	
+	// If queue is empty, return NULL.
+	if (q->front == NULL)
+		return 0;
+		
+	// Store previous front and move front one node ahead
+	struct QNode* temp = q->front;
+	while(1){
+		if(temp->key == ind){
+			return 1;
+		}
+		if(temp->next != NULL){
+			break;
+		}
+		temp = temp->next;
+	}
+	return 0;
+}
 
-// define global variables here
-// common cathode
-const char sevseg[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};// now i use common cathode because i wanna isolate pin7
 
-char floor_number = 1; // 0 1 2 3
-char next_floor = 1;
-struct Queue* q;
-
-char flg;
+char queueIsEmpty(struct Queue* q){
+	if(q->front->next == NULL)
+		return 1;
+	
+	return 0;
+}
 
 
 // define ISRs here
-
 // ISR for blinking seven segment
 ISR (TIMER0_OVF_vect)
 {
@@ -118,6 +150,7 @@ ISR (TIMER0_OVF_vect)
 		flg = 1;
 	}
 }
+
 
 // ISR for floor detection
 ISR (INT1_vect)
@@ -143,7 +176,11 @@ ISR (INT1_vect)
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
-
+	if(flg0 == 0){
+		_delay_ms(5000);
+		flg0 = 1;
+		// here i have to check if queue is not empty setting a flag and doing int0 agian based on the flg0
+	}
 }
 
 
@@ -174,24 +211,20 @@ ISR (INT0_vect)
 		}	break;
 		case 0b01111111 :{
 			next_floor = 4;
-		}	break;
-				
+		}	break;		
 	}
 	
-
 	if(floor_number < next_floor){
 		PORTD = 0x01;
 		PORTD |= 0xF0; // closing all the doors
-		}else if( floor_number == next_floor){
+	}else if( floor_number == next_floor){
 		PORTD |= 0xF0; // closing all the doors
 		PORTD &= (~(1 << (next_floor + 3))); // open the door lock
-		}else{
+	}else{
 		PORTD = 2;
 		PORTD |= 0xF0; // closing all door locks
 	}
-	
 	TCCR0 = 0x05;
-
 }
 
 
@@ -220,9 +253,9 @@ void setup(){
 	
 	PORTC = sevseg[next_floor];
 	
+	flg0 = 1;
 	q = createQueue();
 }
-
 
 
 int main(void)
@@ -232,6 +265,6 @@ int main(void)
     /* Replace with your application code */
     while (1) 
     {
-    }
+	}
 }
 
