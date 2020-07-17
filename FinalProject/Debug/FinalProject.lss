@@ -3,55 +3,57 @@ FinalProject.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000236  00000000  00000000  00000074  2**1
+  0 .text         000002a2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000c  00800060  00000236  000002aa  2**0
+  1 .data         0000000c  00800060  000002a2  00000336  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  000002b6  2**0
+  2 .bss          00000001  0080006c  0080006c  00000342  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000342  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002e8  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000374  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 00000038  00000000  00000000  00000324  2**0
+  5 .debug_aranges 00000040  00000000  00000000  000003b0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000061b  00000000  00000000  0000035c  2**0
+  6 .debug_info   00000643  00000000  00000000  000003f0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000055e  00000000  00000000  00000977  2**0
+  7 .debug_abbrev 0000056f  00000000  00000000  00000a33  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000320  00000000  00000000  00000ed5  2**0
+  8 .debug_line   0000036d  00000000  00000000  00000fa2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  0000009c  00000000  00000000  000011f8  2**2
+  9 .debug_frame  000000c8  00000000  00000000  00001310  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    0000031d  00000000  00000000  00001294  2**0
+ 10 .debug_str    00000305  00000000  00000000  000013d8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000000e0  00000000  00000000  000015b1  2**0
+ 11 .debug_loc    00000136  00000000  00000000  000016dd  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000028  00000000  00000000  00001691  2**0
+ 12 .debug_ranges 00000030  00000000  00000000  00001813  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
-   4:	0c 94 86 00 	jmp	0x10c	; 0x10c <__vector_1>
-   8:	0c 94 41 00 	jmp	0x82	; 0x82 <__vector_2>
-   c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  10:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  14:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  18:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  1c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  20:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  24:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  28:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  2c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  30:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  34:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  38:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  3c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  40:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  44:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  48:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  4c:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
-  50:	0c 94 3f 00 	jmp	0x7e	; 0x7e <__bad_interrupt>
+   4:	0c 94 bc 00 	jmp	0x178	; 0x178 <__vector_1>
+   8:	0c 94 6b 00 	jmp	0xd6	; 0xd6 <__vector_2>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 49 00 	jmp	0x92	; 0x92 <__vector_11>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
 
 00000054 <__ctors_end>:
   54:	11 24       	eor	r1, r1
@@ -65,7 +67,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 e3       	ldi	r30, 0x36	; 54
+  66:	e2 ea       	ldi	r30, 0xA2	; 162
   68:	f2 e0       	ldi	r31, 0x02	; 2
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -73,314 +75,389 @@ Disassembly of section .text:
   70:	ac 36       	cpi	r26, 0x6C	; 108
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
-  76:	0e 94 16 01 	call	0x22c	; 0x22c <main>
-  7a:	0c 94 19 01 	jmp	0x232	; 0x232 <_exit>
 
-0000007e <__bad_interrupt>:
-  7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	ac e6       	ldi	r26, 0x6C	; 108
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
 
-00000082 <__vector_2>:
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	ad 36       	cpi	r26, 0x6D	; 109
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 4c 01 	call	0x298	; 0x298 <main>
+  8a:	0c 94 4f 01 	jmp	0x29e	; 0x29e <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <__vector_11>:
 // i have to define int0 to rising edge
 // also in the ISR checking that which button has been choice from the port B
 
 // ISR
+ISR (TIMER0_OVF_vect)
+{
+  92:	1f 92       	push	r1
+  94:	0f 92       	push	r0
+  96:	0f b6       	in	r0, 0x3f	; 63
+  98:	0f 92       	push	r0
+  9a:	11 24       	eor	r1, r1
+  9c:	8f 93       	push	r24
+  9e:	ef 93       	push	r30
+  a0:	ff 93       	push	r31
+	if(flg){
+  a2:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <__data_end>
+  a6:	88 23       	and	r24, r24
+  a8:	51 f0       	breq	.+20     	; 0xbe <__vector_11+0x2c>
+		PORTC = sevseg[next_floor];
+  aa:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+  ae:	f0 e0       	ldi	r31, 0x00	; 0
+  b0:	ee 59       	subi	r30, 0x9E	; 158
+  b2:	ff 4f       	sbci	r31, 0xFF	; 255
+  b4:	80 81       	ld	r24, Z
+  b6:	85 bb       	out	0x15, r24	; 21
+		flg = 0;
+  b8:	10 92 6c 00 	sts	0x006C, r1	; 0x80006c <__data_end>
+  bc:	04 c0       	rjmp	.+8      	; 0xc6 <__vector_11+0x34>
+	}else{
+		PORTC = 0;
+  be:	15 ba       	out	0x15, r1	; 21
+		flg = 1;
+  c0:	81 e0       	ldi	r24, 0x01	; 1
+  c2:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <__data_end>
+	}
+}
+  c6:	ff 91       	pop	r31
+  c8:	ef 91       	pop	r30
+  ca:	8f 91       	pop	r24
+  cc:	0f 90       	pop	r0
+  ce:	0f be       	out	0x3f, r0	; 63
+  d0:	0f 90       	pop	r0
+  d2:	1f 90       	pop	r1
+  d4:	18 95       	reti
+
+000000d6 <__vector_2>:
+
 ISR (INT1_vect)
 {
-  82:	1f 92       	push	r1
-  84:	0f 92       	push	r0
-  86:	0f b6       	in	r0, 0x3f	; 63
-  88:	0f 92       	push	r0
-  8a:	11 24       	eor	r1, r1
-  8c:	2f 93       	push	r18
-  8e:	3f 93       	push	r19
-  90:	8f 93       	push	r24
-  92:	9f 93       	push	r25
+  d6:	1f 92       	push	r1
+  d8:	0f 92       	push	r0
+  da:	0f b6       	in	r0, 0x3f	; 63
+  dc:	0f 92       	push	r0
+  de:	11 24       	eor	r1, r1
+  e0:	2f 93       	push	r18
+  e2:	3f 93       	push	r19
+  e4:	8f 93       	push	r24
+  e6:	9f 93       	push	r25
+  e8:	ef 93       	push	r30
+  ea:	ff 93       	push	r31
 	switch(PINA){
-  94:	89 b3       	in	r24, 0x19	; 25
-  96:	8b 3f       	cpi	r24, 0xFB	; 251
-  98:	81 f0       	breq	.+32     	; 0xba <__vector_2+0x38>
-  9a:	18 f4       	brcc	.+6      	; 0xa2 <__vector_2+0x20>
-  9c:	87 3f       	cpi	r24, 0xF7	; 247
-  9e:	89 f0       	breq	.+34     	; 0xc2 <__vector_2+0x40>
-  a0:	13 c0       	rjmp	.+38     	; 0xc8 <__vector_2+0x46>
-  a2:	8d 3f       	cpi	r24, 0xFD	; 253
-  a4:	31 f0       	breq	.+12     	; 0xb2 <__vector_2+0x30>
-  a6:	8e 3f       	cpi	r24, 0xFE	; 254
-  a8:	79 f4       	brne	.+30     	; 0xc8 <__vector_2+0x46>
+  ec:	89 b3       	in	r24, 0x19	; 25
+  ee:	8b 3f       	cpi	r24, 0xFB	; 251
+  f0:	81 f0       	breq	.+32     	; 0x112 <__vector_2+0x3c>
+  f2:	18 f4       	brcc	.+6      	; 0xfa <__vector_2+0x24>
+  f4:	87 3f       	cpi	r24, 0xF7	; 247
+  f6:	89 f0       	breq	.+34     	; 0x11a <__vector_2+0x44>
+  f8:	13 c0       	rjmp	.+38     	; 0x120 <__vector_2+0x4a>
+  fa:	8d 3f       	cpi	r24, 0xFD	; 253
+  fc:	31 f0       	breq	.+12     	; 0x10a <__vector_2+0x34>
+  fe:	8e 3f       	cpi	r24, 0xFE	; 254
+ 100:	79 f4       	brne	.+30     	; 0x120 <__vector_2+0x4a>
 		case 0b11111110 :{
 			floor_number = 1;
-  aa:	81 e0       	ldi	r24, 0x01	; 1
-  ac:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
+ 102:	81 e0       	ldi	r24, 0x01	; 1
+ 104:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
 		}	break;
-  b0:	0b c0       	rjmp	.+22     	; 0xc8 <__vector_2+0x46>
+ 108:	0b c0       	rjmp	.+22     	; 0x120 <__vector_2+0x4a>
 		case 0b11111101 :{
 			floor_number = 2;
-  b2:	82 e0       	ldi	r24, 0x02	; 2
-  b4:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
+ 10a:	82 e0       	ldi	r24, 0x02	; 2
+ 10c:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
 		}	break;
-  b8:	07 c0       	rjmp	.+14     	; 0xc8 <__vector_2+0x46>
+ 110:	07 c0       	rjmp	.+14     	; 0x120 <__vector_2+0x4a>
 		case 0b11111011 :{
 			floor_number = 3;
-  ba:	83 e0       	ldi	r24, 0x03	; 3
-  bc:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
+ 112:	83 e0       	ldi	r24, 0x03	; 3
+ 114:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
 		}	break;
-  c0:	03 c0       	rjmp	.+6      	; 0xc8 <__vector_2+0x46>
+ 118:	03 c0       	rjmp	.+6      	; 0x120 <__vector_2+0x4a>
 		case 0b11110111 :{
 			floor_number = 4;
-  c2:	84 e0       	ldi	r24, 0x04	; 4
-  c4:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
+ 11a:	84 e0       	ldi	r24, 0x04	; 4
+ 11c:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <floor_number>
 		}	break;
 	}
 	PORTA = 0xFF;
-  c8:	8f ef       	ldi	r24, 0xFF	; 255
-  ca:	8b bb       	out	0x1b, r24	; 27
+ 120:	8f ef       	ldi	r24, 0xFF	; 255
+ 122:	8b bb       	out	0x1b, r24	; 27
 	if(next_floor == floor_number){
-  cc:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  d0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <floor_number>
-  d4:	98 13       	cpse	r25, r24
-  d6:	11 c0       	rjmp	.+34     	; 0xfa <__vector_2+0x78>
+ 124:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 128:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <floor_number>
+ 12c:	98 13       	cpse	r25, r24
+ 12e:	11 c0       	rjmp	.+34     	; 0x152 <__vector_2+0x7c>
 		PORTD &= (255 << 2); // stop the motor
-  d8:	82 b3       	in	r24, 0x12	; 18
-  da:	8c 7f       	andi	r24, 0xFC	; 252
-  dc:	82 bb       	out	0x12, r24	; 18
+ 130:	82 b3       	in	r24, 0x12	; 18
+ 132:	8c 7f       	andi	r24, 0xFC	; 252
+ 134:	82 bb       	out	0x12, r24	; 18
 		PORTD &= (~(1 << (next_floor + 3))); // open the door lock for the current floor
-  de:	22 b3       	in	r18, 0x12	; 18
-  e0:	30 91 60 00 	lds	r19, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
-  e4:	3d 5f       	subi	r19, 0xFD	; 253
-  e6:	81 e0       	ldi	r24, 0x01	; 1
-  e8:	90 e0       	ldi	r25, 0x00	; 0
-  ea:	02 c0       	rjmp	.+4      	; 0xf0 <__vector_2+0x6e>
-  ec:	88 0f       	add	r24, r24
-  ee:	99 1f       	adc	r25, r25
-  f0:	3a 95       	dec	r19
-  f2:	e2 f7       	brpl	.-8      	; 0xec <__vector_2+0x6a>
-  f4:	80 95       	com	r24
-  f6:	82 23       	and	r24, r18
-  f8:	82 bb       	out	0x12, r24	; 18
+ 136:	22 b3       	in	r18, 0x12	; 18
+ 138:	30 91 60 00 	lds	r19, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 13c:	3d 5f       	subi	r19, 0xFD	; 253
+ 13e:	81 e0       	ldi	r24, 0x01	; 1
+ 140:	90 e0       	ldi	r25, 0x00	; 0
+ 142:	02 c0       	rjmp	.+4      	; 0x148 <__vector_2+0x72>
+ 144:	88 0f       	add	r24, r24
+ 146:	99 1f       	adc	r25, r25
+ 148:	3a 95       	dec	r19
+ 14a:	e2 f7       	brpl	.-8      	; 0x144 <__vector_2+0x6e>
+ 14c:	80 95       	com	r24
+ 14e:	82 23       	and	r24, r18
+ 150:	82 bb       	out	0x12, r24	; 18
 	}
+	TCCR0 = 0;
+ 152:	13 be       	out	0x33, r1	; 51
+	PORTC = sevseg[floor_number];
+ 154:	e0 91 61 00 	lds	r30, 0x0061	; 0x800061 <floor_number>
+ 158:	f0 e0       	ldi	r31, 0x00	; 0
+ 15a:	ee 59       	subi	r30, 0x9E	; 158
+ 15c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 15e:	80 81       	ld	r24, Z
+ 160:	85 bb       	out	0x15, r24	; 21
 }
-  fa:	9f 91       	pop	r25
-  fc:	8f 91       	pop	r24
-  fe:	3f 91       	pop	r19
- 100:	2f 91       	pop	r18
- 102:	0f 90       	pop	r0
- 104:	0f be       	out	0x3f, r0	; 63
- 106:	0f 90       	pop	r0
- 108:	1f 90       	pop	r1
- 10a:	18 95       	reti
+ 162:	ff 91       	pop	r31
+ 164:	ef 91       	pop	r30
+ 166:	9f 91       	pop	r25
+ 168:	8f 91       	pop	r24
+ 16a:	3f 91       	pop	r19
+ 16c:	2f 91       	pop	r18
+ 16e:	0f 90       	pop	r0
+ 170:	0f be       	out	0x3f, r0	; 63
+ 172:	0f 90       	pop	r0
+ 174:	1f 90       	pop	r1
+ 176:	18 95       	reti
 
-0000010c <__vector_1>:
+00000178 <__vector_1>:
 
 ISR (INT0_vect)
 {
- 10c:	1f 92       	push	r1
- 10e:	0f 92       	push	r0
- 110:	0f b6       	in	r0, 0x3f	; 63
- 112:	0f 92       	push	r0
- 114:	11 24       	eor	r1, r1
- 116:	2f 93       	push	r18
- 118:	3f 93       	push	r19
- 11a:	8f 93       	push	r24
- 11c:	9f 93       	push	r25
- 11e:	ef 93       	push	r30
- 120:	ff 93       	push	r31
+ 178:	1f 92       	push	r1
+ 17a:	0f 92       	push	r0
+ 17c:	0f b6       	in	r0, 0x3f	; 63
+ 17e:	0f 92       	push	r0
+ 180:	11 24       	eor	r1, r1
+ 182:	2f 93       	push	r18
+ 184:	3f 93       	push	r19
+ 186:	8f 93       	push	r24
+ 188:	9f 93       	push	r25
 	switch(PINB){
- 122:	86 b3       	in	r24, 0x16	; 22
- 124:	8f 3e       	cpi	r24, 0xEF	; 239
- 126:	11 f1       	breq	.+68     	; 0x16c <__vector_1+0x60>
- 128:	38 f4       	brcc	.+14     	; 0x138 <__vector_1+0x2c>
- 12a:	8f 3b       	cpi	r24, 0xBF	; 191
- 12c:	39 f1       	breq	.+78     	; 0x17c <__vector_1+0x70>
- 12e:	8f 3d       	cpi	r24, 0xDF	; 223
- 130:	09 f1       	breq	.+66     	; 0x174 <__vector_1+0x68>
- 132:	8f 37       	cpi	r24, 0x7F	; 127
- 134:	51 f5       	brne	.+84     	; 0x18a <__vector_1+0x7e>
- 136:	26 c0       	rjmp	.+76     	; 0x184 <__vector_1+0x78>
- 138:	8b 3f       	cpi	r24, 0xFB	; 251
- 13a:	81 f0       	breq	.+32     	; 0x15c <__vector_1+0x50>
- 13c:	18 f4       	brcc	.+6      	; 0x144 <__vector_1+0x38>
- 13e:	87 3f       	cpi	r24, 0xF7	; 247
- 140:	89 f0       	breq	.+34     	; 0x164 <__vector_1+0x58>
- 142:	23 c0       	rjmp	.+70     	; 0x18a <__vector_1+0x7e>
- 144:	8d 3f       	cpi	r24, 0xFD	; 253
- 146:	31 f0       	breq	.+12     	; 0x154 <__vector_1+0x48>
- 148:	8e 3f       	cpi	r24, 0xFE	; 254
- 14a:	f9 f4       	brne	.+62     	; 0x18a <__vector_1+0x7e>
+ 18a:	86 b3       	in	r24, 0x16	; 22
+ 18c:	8f 3e       	cpi	r24, 0xEF	; 239
+ 18e:	11 f1       	breq	.+68     	; 0x1d4 <__vector_1+0x5c>
+ 190:	38 f4       	brcc	.+14     	; 0x1a0 <__vector_1+0x28>
+ 192:	8f 3b       	cpi	r24, 0xBF	; 191
+ 194:	39 f1       	breq	.+78     	; 0x1e4 <__vector_1+0x6c>
+ 196:	8f 3d       	cpi	r24, 0xDF	; 223
+ 198:	09 f1       	breq	.+66     	; 0x1dc <__vector_1+0x64>
+ 19a:	8f 37       	cpi	r24, 0x7F	; 127
+ 19c:	51 f5       	brne	.+84     	; 0x1f2 <__vector_1+0x7a>
+ 19e:	26 c0       	rjmp	.+76     	; 0x1ec <__vector_1+0x74>
+ 1a0:	8b 3f       	cpi	r24, 0xFB	; 251
+ 1a2:	81 f0       	breq	.+32     	; 0x1c4 <__vector_1+0x4c>
+ 1a4:	18 f4       	brcc	.+6      	; 0x1ac <__vector_1+0x34>
+ 1a6:	87 3f       	cpi	r24, 0xF7	; 247
+ 1a8:	89 f0       	breq	.+34     	; 0x1cc <__vector_1+0x54>
+ 1aa:	23 c0       	rjmp	.+70     	; 0x1f2 <__vector_1+0x7a>
+ 1ac:	8d 3f       	cpi	r24, 0xFD	; 253
+ 1ae:	31 f0       	breq	.+12     	; 0x1bc <__vector_1+0x44>
+ 1b0:	8e 3f       	cpi	r24, 0xFE	; 254
+ 1b2:	f9 f4       	brne	.+62     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11111110 :{
 			next_floor = 1;
- 14c:	81 e0       	ldi	r24, 0x01	; 1
- 14e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1b4:	81 e0       	ldi	r24, 0x01	; 1
+ 1b6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 152:	1b c0       	rjmp	.+54     	; 0x18a <__vector_1+0x7e>
+ 1ba:	1b c0       	rjmp	.+54     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11111101 :{
 			next_floor = 2;			
- 154:	82 e0       	ldi	r24, 0x02	; 2
- 156:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1bc:	82 e0       	ldi	r24, 0x02	; 2
+ 1be:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 15a:	17 c0       	rjmp	.+46     	; 0x18a <__vector_1+0x7e>
+ 1c2:	17 c0       	rjmp	.+46     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11111011 :{
 			next_floor = 3;
- 15c:	83 e0       	ldi	r24, 0x03	; 3
- 15e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1c4:	83 e0       	ldi	r24, 0x03	; 3
+ 1c6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 162:	13 c0       	rjmp	.+38     	; 0x18a <__vector_1+0x7e>
+ 1ca:	13 c0       	rjmp	.+38     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11110111 :{
 			next_floor = 4;
- 164:	84 e0       	ldi	r24, 0x04	; 4
- 166:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1cc:	84 e0       	ldi	r24, 0x04	; 4
+ 1ce:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 16a:	0f c0       	rjmp	.+30     	; 0x18a <__vector_1+0x7e>
+ 1d2:	0f c0       	rjmp	.+30     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11101111 :{
 			next_floor = 1;
- 16c:	81 e0       	ldi	r24, 0x01	; 1
- 16e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1d4:	81 e0       	ldi	r24, 0x01	; 1
+ 1d6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 172:	0b c0       	rjmp	.+22     	; 0x18a <__vector_1+0x7e>
+ 1da:	0b c0       	rjmp	.+22     	; 0x1f2 <__vector_1+0x7a>
 		case 0b11011111 :{
 			next_floor = 2;
- 174:	82 e0       	ldi	r24, 0x02	; 2
- 176:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1dc:	82 e0       	ldi	r24, 0x02	; 2
+ 1de:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 17a:	07 c0       	rjmp	.+14     	; 0x18a <__vector_1+0x7e>
+ 1e2:	07 c0       	rjmp	.+14     	; 0x1f2 <__vector_1+0x7a>
 		case 0b10111111 :{
 			next_floor = 3;
- 17c:	83 e0       	ldi	r24, 0x03	; 3
- 17e:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1e4:	83 e0       	ldi	r24, 0x03	; 3
+ 1e6:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
- 182:	03 c0       	rjmp	.+6      	; 0x18a <__vector_1+0x7e>
+ 1ea:	03 c0       	rjmp	.+6      	; 0x1f2 <__vector_1+0x7a>
 		case 0b01111111 :{
 			next_floor = 4;
- 184:	84 e0       	ldi	r24, 0x04	; 4
- 186:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1ec:	84 e0       	ldi	r24, 0x04	; 4
+ 1ee:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 		}	break;
 				
 	}
 	if(floor_number < next_floor){
- 18a:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <floor_number>
- 18e:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 192:	98 17       	cp	r25, r24
- 194:	30 f4       	brcc	.+12     	; 0x1a2 <__vector_1+0x96>
+ 1f2:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <floor_number>
+ 1f6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 1fa:	98 17       	cp	r25, r24
+ 1fc:	30 f4       	brcc	.+12     	; 0x20a <__vector_1+0x92>
 		PORTD = 0x01;
- 196:	81 e0       	ldi	r24, 0x01	; 1
- 198:	82 bb       	out	0x12, r24	; 18
+ 1fe:	81 e0       	ldi	r24, 0x01	; 1
+ 200:	82 bb       	out	0x12, r24	; 18
 		PORTD |= 0xF0; // closing all the doors
- 19a:	82 b3       	in	r24, 0x12	; 18
- 19c:	80 6f       	ori	r24, 0xF0	; 240
- 19e:	82 bb       	out	0x12, r24	; 18
- 1a0:	19 c0       	rjmp	.+50     	; 0x1d4 <__vector_1+0xc8>
+ 202:	82 b3       	in	r24, 0x12	; 18
+ 204:	80 6f       	ori	r24, 0xF0	; 240
+ 206:	82 bb       	out	0x12, r24	; 18
+ 208:	19 c0       	rjmp	.+50     	; 0x23c <__vector_1+0xc4>
 	}else if( floor_number == next_floor){
- 1a2:	98 13       	cpse	r25, r24
- 1a4:	12 c0       	rjmp	.+36     	; 0x1ca <__vector_1+0xbe>
+ 20a:	98 13       	cpse	r25, r24
+ 20c:	12 c0       	rjmp	.+36     	; 0x232 <__vector_1+0xba>
 		PORTD |= 0xF0; // closing all the doors
- 1a6:	82 b3       	in	r24, 0x12	; 18
- 1a8:	80 6f       	ori	r24, 0xF0	; 240
- 1aa:	82 bb       	out	0x12, r24	; 18
+ 20e:	82 b3       	in	r24, 0x12	; 18
+ 210:	80 6f       	ori	r24, 0xF0	; 240
+ 212:	82 bb       	out	0x12, r24	; 18
 		PORTD &= (~(1 << (next_floor + 3))); // open the door lock
- 1ac:	22 b3       	in	r18, 0x12	; 18
- 1ae:	30 91 60 00 	lds	r19, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 1b2:	3d 5f       	subi	r19, 0xFD	; 253
- 1b4:	81 e0       	ldi	r24, 0x01	; 1
- 1b6:	90 e0       	ldi	r25, 0x00	; 0
- 1b8:	02 c0       	rjmp	.+4      	; 0x1be <__vector_1+0xb2>
- 1ba:	88 0f       	add	r24, r24
- 1bc:	99 1f       	adc	r25, r25
- 1be:	3a 95       	dec	r19
- 1c0:	e2 f7       	brpl	.-8      	; 0x1ba <__vector_1+0xae>
- 1c2:	80 95       	com	r24
- 1c4:	82 23       	and	r24, r18
- 1c6:	82 bb       	out	0x12, r24	; 18
- 1c8:	05 c0       	rjmp	.+10     	; 0x1d4 <__vector_1+0xc8>
+ 214:	22 b3       	in	r18, 0x12	; 18
+ 216:	30 91 60 00 	lds	r19, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 21a:	3d 5f       	subi	r19, 0xFD	; 253
+ 21c:	81 e0       	ldi	r24, 0x01	; 1
+ 21e:	90 e0       	ldi	r25, 0x00	; 0
+ 220:	02 c0       	rjmp	.+4      	; 0x226 <__vector_1+0xae>
+ 222:	88 0f       	add	r24, r24
+ 224:	99 1f       	adc	r25, r25
+ 226:	3a 95       	dec	r19
+ 228:	e2 f7       	brpl	.-8      	; 0x222 <__vector_1+0xaa>
+ 22a:	80 95       	com	r24
+ 22c:	82 23       	and	r24, r18
+ 22e:	82 bb       	out	0x12, r24	; 18
+ 230:	05 c0       	rjmp	.+10     	; 0x23c <__vector_1+0xc4>
 	}else{
 		PORTD = 2;
- 1ca:	82 e0       	ldi	r24, 0x02	; 2
- 1cc:	82 bb       	out	0x12, r24	; 18
+ 232:	82 e0       	ldi	r24, 0x02	; 2
+ 234:	82 bb       	out	0x12, r24	; 18
 		PORTD |= 0xF0; // closing all door locks
- 1ce:	82 b3       	in	r24, 0x12	; 18
- 1d0:	80 6f       	ori	r24, 0xF0	; 240
- 1d2:	82 bb       	out	0x12, r24	; 18
+ 236:	82 b3       	in	r24, 0x12	; 18
+ 238:	80 6f       	ori	r24, 0xF0	; 240
+ 23a:	82 bb       	out	0x12, r24	; 18
 	}
-	PORTC = sevseg[next_floor]; // floor number should be set at other ISR
- 1d4:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 1d8:	f0 e0       	ldi	r31, 0x00	; 0
- 1da:	ee 59       	subi	r30, 0x9E	; 158
- 1dc:	ff 4f       	sbci	r31, 0xFF	; 255
- 1de:	80 81       	ld	r24, Z
- 1e0:	85 bb       	out	0x15, r24	; 21
+	
+	TCCR0 = 0x05;
+ 23c:	85 e0       	ldi	r24, 0x05	; 5
+ 23e:	83 bf       	out	0x33, r24	; 51
 }
- 1e2:	ff 91       	pop	r31
- 1e4:	ef 91       	pop	r30
- 1e6:	9f 91       	pop	r25
- 1e8:	8f 91       	pop	r24
- 1ea:	3f 91       	pop	r19
- 1ec:	2f 91       	pop	r18
- 1ee:	0f 90       	pop	r0
- 1f0:	0f be       	out	0x3f, r0	; 63
- 1f2:	0f 90       	pop	r0
- 1f4:	1f 90       	pop	r1
- 1f6:	18 95       	reti
+ 240:	9f 91       	pop	r25
+ 242:	8f 91       	pop	r24
+ 244:	3f 91       	pop	r19
+ 246:	2f 91       	pop	r18
+ 248:	0f 90       	pop	r0
+ 24a:	0f be       	out	0x3f, r0	; 63
+ 24c:	0f 90       	pop	r0
+ 24e:	1f 90       	pop	r1
+ 250:	18 95       	reti
 
-000001f8 <setup>:
+00000252 <setup>:
 
 
 void setup(){
 	// TODO : all the setup for ports and configs here
 	DDRA = 0xF0; // define as input for sensors
- 1f8:	80 ef       	ldi	r24, 0xF0	; 240
- 1fa:	8a bb       	out	0x1a, r24	; 26
+ 252:	80 ef       	ldi	r24, 0xF0	; 240
+ 254:	8a bb       	out	0x1a, r24	; 26
 	PORTA = 0x0F;
- 1fc:	8f e0       	ldi	r24, 0x0F	; 15
- 1fe:	8b bb       	out	0x1b, r24	; 27
+ 256:	8f e0       	ldi	r24, 0x0F	; 15
+ 258:	8b bb       	out	0x1b, r24	; 27
 	DDRB = 0x00; // define as input for input keys
- 200:	17 ba       	out	0x17, r1	; 23
+ 25a:	17 ba       	out	0x17, r1	; 23
 	PORTB = 0xFF; // set the pull up enable for keys
- 202:	8f ef       	ldi	r24, 0xFF	; 255
- 204:	88 bb       	out	0x18, r24	; 24
+ 25c:	8f ef       	ldi	r24, 0xFF	; 255
+ 25e:	88 bb       	out	0x18, r24	; 24
 	DDRC = 0xFF; // set as output for seven segment
- 206:	84 bb       	out	0x14, r24	; 20
+ 260:	84 bb       	out	0x14, r24	; 20
 	DDRD = 0xF3; // last two bits output for motor control other bits input
- 208:	93 ef       	ldi	r25, 0xF3	; 243
- 20a:	91 bb       	out	0x11, r25	; 17
+ 262:	93 ef       	ldi	r25, 0xF3	; 243
+ 264:	91 bb       	out	0x11, r25	; 17
 	PORTB = 0xFF; // setting pull up and test for the motor
- 20c:	88 bb       	out	0x18, r24	; 24
+ 266:	88 bb       	out	0x18, r24	; 24
 	
 	PORTD = 0b11110011;
- 20e:	92 bb       	out	0x12, r25	; 18
+ 268:	92 bb       	out	0x12, r25	; 18
 	
 	GICR |= (1 << INT0); // enabling interrupt 0
- 210:	8b b7       	in	r24, 0x3b	; 59
- 212:	80 64       	ori	r24, 0x40	; 64
- 214:	8b bf       	out	0x3b, r24	; 59
+ 26a:	8b b7       	in	r24, 0x3b	; 59
+ 26c:	80 64       	ori	r24, 0x40	; 64
+ 26e:	8b bf       	out	0x3b, r24	; 59
 	MCUCR |= ((1 << ISC01) | (1 << ISC00)); // setting the interrupt 0 to detect rising edge
- 216:	85 b7       	in	r24, 0x35	; 53
- 218:	83 60       	ori	r24, 0x03	; 3
- 21a:	85 bf       	out	0x35, r24	; 53
+ 270:	85 b7       	in	r24, 0x35	; 53
+ 272:	83 60       	ori	r24, 0x03	; 3
+ 274:	85 bf       	out	0x35, r24	; 53
 	
 	GICR |= (1 << INT1); // enabling interrupt 0
- 21c:	8b b7       	in	r24, 0x3b	; 59
- 21e:	80 68       	ori	r24, 0x80	; 128
- 220:	8b bf       	out	0x3b, r24	; 59
+ 276:	8b b7       	in	r24, 0x3b	; 59
+ 278:	80 68       	ori	r24, 0x80	; 128
+ 27a:	8b bf       	out	0x3b, r24	; 59
 	MCUCR |= ((1 << ISC11) | (1 << ISC10)); // setting the interrupt 0 to detect rising edge
- 222:	85 b7       	in	r24, 0x35	; 53
- 224:	8c 60       	ori	r24, 0x0C	; 12
- 226:	85 bf       	out	0x35, r24	; 53
+ 27c:	85 b7       	in	r24, 0x35	; 53
+ 27e:	8c 60       	ori	r24, 0x0C	; 12
+ 280:	85 bf       	out	0x35, r24	; 53
+	
+	TIMSK = 0x01;
+ 282:	81 e0       	ldi	r24, 0x01	; 1
+ 284:	89 bf       	out	0x39, r24	; 57
 	
 	// really i can say now i am a good avr developer
 	sei(); // enabling global interrupt	
- 228:	78 94       	sei
- 22a:	08 95       	ret
+ 286:	78 94       	sei
+	
+	PORTC = sevseg[next_floor];
+ 288:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 28c:	f0 e0       	ldi	r31, 0x00	; 0
+ 28e:	ee 59       	subi	r30, 0x9E	; 158
+ 290:	ff 4f       	sbci	r31, 0xFF	; 255
+ 292:	80 81       	ld	r24, Z
+ 294:	85 bb       	out	0x15, r24	; 21
+ 296:	08 95       	ret
 
-0000022c <main>:
+00000298 <main>:
 
 
 int main(void)
 {
 	
 	setup();
- 22c:	0e 94 fc 00 	call	0x1f8	; 0x1f8 <setup>
- 230:	ff cf       	rjmp	.-2      	; 0x230 <main+0x4>
+ 298:	0e 94 29 01 	call	0x252	; 0x252 <setup>
+ 29c:	ff cf       	rjmp	.-2      	; 0x29c <main+0x4>
 
-00000232 <_exit>:
- 232:	f8 94       	cli
+0000029e <_exit>:
+ 29e:	f8 94       	cli
 
-00000234 <__stop_program>:
- 234:	ff cf       	rjmp	.-2      	; 0x234 <__stop_program>
+000002a0 <__stop_program>:
+ 2a0:	ff cf       	rjmp	.-2      	; 0x2a0 <__stop_program>

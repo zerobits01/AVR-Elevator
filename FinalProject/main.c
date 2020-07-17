@@ -24,18 +24,30 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
+
 
 // define global variables here
 // common cathode
 const char sevseg[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};// now i use common cathode because i wanna isolate pin7
 char floor_number = 1; // 0 1 2 3
 char next_floor = 1;
+char flg;
 // define ISRs here
 // i have to define int0 to rising edge
 // also in the ISR checking that which button has been choice from the port B
 
 // ISR
+ISR (TIMER0_OVF_vect)
+{
+	if(flg){
+		PORTC = sevseg[next_floor];
+		flg = 0;
+	}else{
+		PORTC = 0;
+		flg = 1;
+	}
+}
+
 ISR (INT1_vect)
 {
 	switch(PINA){
@@ -57,6 +69,8 @@ ISR (INT1_vect)
 		PORTD &= (255 << 2); // stop the motor
 		PORTD &= (~(1 << (next_floor + 3))); // open the door lock for the current floor
 	}
+	TCCR0 = 0;
+	PORTC = sevseg[floor_number];
 }
 
 ISR (INT0_vect)
@@ -98,7 +112,8 @@ ISR (INT0_vect)
 		PORTD = 2;
 		PORTD |= 0xF0; // closing all door locks
 	}
-	PORTC = sevseg[next_floor]; // floor number should be set at other ISR
+	
+	TCCR0 = 0x05;
 }
 
 
@@ -120,8 +135,12 @@ void setup(){
 	GICR |= (1 << INT1); // enabling interrupt 0
 	MCUCR |= ((1 << ISC11) | (1 << ISC10)); // setting the interrupt 0 to detect rising edge
 	
+	TIMSK = 0x01;
+	
 	// really i can say now i am a good avr developer
 	sei(); // enabling global interrupt	
+	
+	PORTC = sevseg[next_floor];
 }
 
 
