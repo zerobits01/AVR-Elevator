@@ -119,7 +119,7 @@ char containsInQueue(struct Queue* q, char ind){
 
 char queueIsEmpty(struct Queue* q){
 	if(q->front->next == NULL)
-	return 1;
+		return 1;
 	
 	return 0;
 }
@@ -134,6 +134,19 @@ struct Queue* q;
 char flg;
 char software = 0;
 
+void gotoNextFloor(int nxt){
+	if(floor_number < nxt){
+		PORTD = 0x01;
+		PORTD |= 0xF0; // closing all the doors
+		}else if( floor_number == nxt){
+		PORTD |= 0xF0; // closing all the doors
+		PORTD &= (~(1 << (nxt + 3))); // open the door lock
+		}else{
+		PORTD = 2;
+		PORTD |= 0xF0; // closing all door locks
+	}
+	TCCR0 = 0x05;
+}
 
 ISR (TIMER0_OVF_vect)
 {
@@ -175,7 +188,7 @@ ISR (INT1_vect)
 ISR (INT0_vect)
 {
 	if(software){
-		
+		next_floor = deQueue(q);
 	}else{
 		switch(PINB){
 			case 0b11111110 :{
@@ -204,18 +217,20 @@ ISR (INT0_vect)
 			}	break;
 		}
 	}
-
-	if(floor_number < next_floor){
-		PORTD = 0x01;
-		PORTD |= 0xF0; // closing all the doors
-	}else if( floor_number == next_floor){
-		PORTD |= 0xF0; // closing all the doors
-		PORTD &= (~(1 << (next_floor + 3))); // open the door lock
+	
+	
+	/* 
+		here we have to check if queue is empty start imediatly 
+		else we have to add to queue then in door close after getting 
+		on we have to check queue and cause software if queue is not empty
+	*/
+	if(queueIsEmpty(q)){
+		enQueue(q, next_floor);
+		gotoNextFloor(deQueue(q)->key);
 	}else{
-		PORTD = 2;
-		PORTD |= 0xF0; // closing all door locks
+		enQueue(q, next_floor);
 	}
-	TCCR0 = 0x05;
+	
 }
 
 
