@@ -24,19 +24,90 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdlib.h>
+
+// A linked list (LL) node to store a queue entry
+struct QNode {
+	int key;
+	struct QNode* next;
+};
+
+// The queue, front stores the front node of LL and rear stores the
+// last node of LL
+struct Queue {
+	struct QNode *front, *rear;
+};
+
+// A utility function to create a new linked list node.
+struct QNode* newNode(int k)
+{
+	struct QNode* temp = (struct QNode*)malloc(sizeof(struct QNode));
+	temp->key = k;
+	temp->next = NULL;
+	return temp;
+}
+
+// A utility function to create an empty queue
+struct Queue* createQueue()
+{
+	struct Queue* q = (struct Queue*)malloc(sizeof(struct Queue));
+	q->front = q->rear = NULL;
+	return q;
+}
+
+// The function to add a key k to q
+void enQueue(struct Queue* q, int k)
+{
+	// Create a new LL node
+	struct QNode* temp = newNode(k);
+	
+	// If queue is empty, then new node is front and rear both
+	if (q->rear == NULL) {
+		q->front = q->rear = temp;
+		return;
+	}
+	
+	// Add the new node at the end of queue and change rear
+	q->rear->next = temp;
+	q->rear = temp;
+}
+
+// Function to remove a key from given queue q
+void deQueue(struct Queue* q)
+{
+	// If queue is empty, return NULL.
+	if (q->front == NULL)
+	return;
+	
+	// Store previous front and move front one node ahead
+	struct QNode* temp = q->front;
+	
+	q->front = q->front->next;
+	
+	// If front becomes NULL, then change rear also as NULL
+	if (q->front == NULL)
+	q->rear = NULL;
+	
+	free(temp);
+}
+
 
 
 // define global variables here
 // common cathode
 const char sevseg[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0x7D, 0x07, 0x7F, 0x6F};// now i use common cathode because i wanna isolate pin7
+
 char floor_number = 1; // 0 1 2 3
 char next_floor = 1;
-char flg;
-// define ISRs here
-// i have to define int0 to rising edge
-// also in the ISR checking that which button has been choice from the port B
+struct Queue* q;
 
-// ISR
+char flg;
+
+
+// define ISRs here
+
+// ISR for blinking seven segment
 ISR (TIMER0_OVF_vect)
 {
 	if(flg){
@@ -48,6 +119,7 @@ ISR (TIMER0_OVF_vect)
 	}
 }
 
+// ISR for floor detection
 ISR (INT1_vect)
 {
 	switch(PINA){
@@ -71,8 +143,11 @@ ISR (INT1_vect)
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
+
 }
 
+
+// ISR for buttons detection
 ISR (INT0_vect)
 {
 	switch(PINB){
@@ -80,7 +155,7 @@ ISR (INT0_vect)
 			next_floor = 1;
 		}	break;
 		case 0b11111101 :{
-			next_floor = 2;			
+			next_floor = 2;
 		}	break;
 		case 0b11111011 :{
 			next_floor = 3;
@@ -102,18 +177,21 @@ ISR (INT0_vect)
 		}	break;
 				
 	}
+	
+
 	if(floor_number < next_floor){
 		PORTD = 0x01;
 		PORTD |= 0xF0; // closing all the doors
-	}else if( floor_number == next_floor){
+		}else if( floor_number == next_floor){
 		PORTD |= 0xF0; // closing all the doors
 		PORTD &= (~(1 << (next_floor + 3))); // open the door lock
-	}else{
+		}else{
 		PORTD = 2;
 		PORTD |= 0xF0; // closing all door locks
 	}
 	
 	TCCR0 = 0x05;
+
 }
 
 
@@ -141,6 +219,8 @@ void setup(){
 	sei(); // enabling global interrupt	
 	
 	PORTC = sevseg[next_floor];
+	
+	q = createQueue();
 }
 
 
