@@ -601,42 +601,43 @@ ISR (INT1_vect)
  3e8:	ff 4f       	sbci	r31, 0xFF	; 255
  3ea:	80 81       	ld	r24, Z
  3ec:	85 bb       	out	0x15, r24	; 21
+
+	ismoving = 0;
+ 3ee:	10 92 72 00 	sts	0x0072, r1	; 0x800072 <__data_end>
 	return 0;
 }
 
 
 char queueIsEmpty(struct Queue* q){
 	if(q->front == NULL)
- 3ee:	e0 91 74 00 	lds	r30, 0x0074	; 0x800074 <q>
- 3f2:	f0 91 75 00 	lds	r31, 0x0075	; 0x800075 <q+0x1>
-		PORTD &= (~(1 << (next_floor + 3))); // open the door lock for the current floor
+ 3f2:	e0 91 74 00 	lds	r30, 0x0074	; 0x800074 <q>
+ 3f6:	f0 91 75 00 	lds	r31, 0x0075	; 0x800075 <q+0x1>
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
-	
+
+	ismoving = 0;
 	if(!queueIsEmpty(q)){
- 3f6:	80 81       	ld	r24, Z
- 3f8:	91 81       	ldd	r25, Z+1	; 0x01
- 3fa:	89 2b       	or	r24, r25
- 3fc:	69 f0       	breq	.+26     	; 0x418 <__LOCK_REGION_LENGTH__+0x18>
+ 3fa:	80 81       	ld	r24, Z
+ 3fc:	91 81       	ldd	r25, Z+1	; 0x01
+ 3fe:	89 2b       	or	r24, r25
+ 400:	59 f0       	breq	.+22     	; 0x418 <__LOCK_REGION_LENGTH__+0x18>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 3fe:	2f e7       	ldi	r18, 0x7F	; 127
- 400:	8a e1       	ldi	r24, 0x1A	; 26
- 402:	96 e0       	ldi	r25, 0x06	; 6
- 404:	21 50       	subi	r18, 0x01	; 1
- 406:	80 40       	sbci	r24, 0x00	; 0
- 408:	90 40       	sbci	r25, 0x00	; 0
- 40a:	e1 f7       	brne	.-8      	; 0x404 <__LOCK_REGION_LENGTH__+0x4>
- 40c:	00 c0       	rjmp	.+0      	; 0x40e <__LOCK_REGION_LENGTH__+0xe>
- 40e:	00 00       	nop
+ 402:	2f e7       	ldi	r18, 0x7F	; 127
+ 404:	8a e1       	ldi	r24, 0x1A	; 26
+ 406:	96 e0       	ldi	r25, 0x06	; 6
+ 408:	21 50       	subi	r18, 0x01	; 1
+ 40a:	80 40       	sbci	r24, 0x00	; 0
+ 40c:	90 40       	sbci	r25, 0x00	; 0
+ 40e:	e1 f7       	brne	.-8      	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
+ 410:	00 c0       	rjmp	.+0      	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
+ 412:	00 00       	nop
 		_delay_ms(2000);
-		ismoving = 0;
- 410:	10 92 72 00 	sts	0x0072, r1	; 0x800072 <__data_end>
 		detectAndMove();
  414:	0e 94 d3 00 	call	0x1a6	; 0x1a6 <detectAndMove>
 	}
@@ -869,8 +870,8 @@ int main(void)
  59a:	30 91 63 00 	lds	r19, 0x0063	; 0x800063 <__malloc_heap_start+0x1>
  59e:	30 93 77 00 	sts	0x0077, r19	; 0x800077 <__brkval+0x1>
  5a2:	20 93 76 00 	sts	0x0076, r18	; 0x800076 <__brkval>
- 5a6:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 5aa:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
+ 5a6:	20 91 60 00 	lds	r18, 0x0060	; 0x800060 <__data_start>
+ 5aa:	30 91 61 00 	lds	r19, 0x0061	; 0x800061 <__data_start+0x1>
  5ae:	21 15       	cp	r18, r1
  5b0:	31 05       	cpc	r19, r1
  5b2:	41 f4       	brne	.+16     	; 0x5c4 <malloc+0xea>

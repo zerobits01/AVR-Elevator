@@ -240,10 +240,10 @@ ISR (INT1_vect)
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
-	
+
+	ismoving = 0;
 	if(!queueIsEmpty(q)){
 		_delay_ms(2000);
-		ismoving = 0;
 		detectAndMove();
 	}
 }
