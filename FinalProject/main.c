@@ -23,6 +23,7 @@
 */ 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include <stdlib.h>
 
 // A linked list (LL) node to store a queue entry
@@ -77,7 +78,7 @@ void enQueue(struct Queue* q, int k)
 
 
 // Function to remove a key from given queue q
-struct QNode* deQueue(struct Queue* q)
+char deQueue(struct Queue* q)
 {
 	// If queue is empty, return NULL.
 	if (q->front == NULL)
@@ -91,8 +92,11 @@ struct QNode* deQueue(struct Queue* q)
 	// If front becomes NULL, then change rear also as NULL
 	if (q->front == NULL)
 	q->rear = NULL;
-	
-	return temp;
+
+	char nxt = temp->key;
+	free(temp);
+
+	return nxt;
 }
 
 
@@ -118,7 +122,7 @@ char containsInQueue(struct Queue* q, char ind){
 
 
 char queueIsEmpty(struct Queue* q){
-	if(q->front->next == NULL)
+	if(q->front == NULL)
 		return 1;
 	
 	return 0;
@@ -132,20 +136,74 @@ char floor_number = 1; // 0 1 2 3
 char next_floor = 1;
 struct Queue* q;
 char flg;
-char software = 0;
+char ismoving = 0;
+
+
+void gotoNextFloor(int);
+
+void detectAndMove(){
+	switch(PINB){
+		case 0b11111110 :{
+			if( containsInQueue(q, 1) != 1){
+				enQueue(q, 1);
+			}
+		}	break;
+		case 0b11111101 :{
+			if( containsInQueue(q, 2) != 1){
+				enQueue(q, 2);
+			}
+		}	break;
+		case 0b11111011 :{
+			if( containsInQueue(q, 3) != 1){
+				enQueue(q, 3);
+			}
+		}	break;
+		case 0b11110111 :{
+			if( containsInQueue(q, 4) != 1){
+				enQueue(q, 4);
+			}
+		}	break;
+		case 0b11101111 :{
+			if( containsInQueue(q, 1) != 1){
+				enQueue(q, 1);
+			}
+		}	break;
+		case 0b11011111 :{
+			if(containsInQueue(q, 2) != 1){
+				enQueue(q, 2);
+			}
+		}	break;
+		case 0b10111111 :{
+			if( containsInQueue(q, 3) != 1){
+				enQueue(q, 3);
+			}
+		}	break;
+		case 0b01111111 :{
+			if( containsInQueue(q, 4) != 1){
+				enQueue(q, 4);
+			}
+		}	break;
+	}
+	
+	if(!queueIsEmpty(q) && ismoving != 1){
+		next_floor = deQueue(q);
+		gotoNextFloor(next_floor);
+	}
+}
 
 void gotoNextFloor(int nxt){
 	if(floor_number < nxt){
 		PORTD = 0x01;
 		PORTD |= 0xF0; // closing all the doors
-		}else if( floor_number == nxt){
+	}else if( floor_number == nxt){
 		PORTD |= 0xF0; // closing all the doors
 		PORTD &= (~(1 << (nxt + 3))); // open the door lock
-		}else{
+	}else{
 		PORTD = 2;
 		PORTD |= 0xF0; // closing all door locks
 	}
 	TCCR0 = 0x05;
+	ismoving = 1;
 }
 
 ISR (TIMER0_OVF_vect)
@@ -182,55 +240,17 @@ ISR (INT1_vect)
 	}
 	TCCR0 = 0;
 	PORTC = sevseg[floor_number];
-
+	
+	if(!queueIsEmpty(q)){
+		_delay_ms(2000);
+		ismoving = 0;
+		detectAndMove();
+	}
 }
 
 ISR (INT0_vect)
 {
-	if(software){
-		next_floor = deQueue(q);
-	}else{
-		switch(PINB){
-			case 0b11111110 :{
-				next_floor = 1;
-			}	break;
-			case 0b11111101 :{
-				next_floor = 2;
-			}	break;
-			case 0b11111011 :{
-				next_floor = 3;
-			}	break;
-			case 0b11110111 :{
-				next_floor = 4;
-			}	break;
-			case 0b11101111 :{
-				next_floor = 1;
-			}	break;
-			case 0b11011111 :{
-				next_floor = 2;
-			}	break;
-			case 0b10111111 :{
-				next_floor = 3;
-			}	break;
-			case 0b01111111 :{
-				next_floor = 4;
-			}	break;
-		}
-	}
-	
-	
-	/* 
-		here we have to check if queue is empty start imediatly 
-		else we have to add to queue then in door close after getting 
-		on we have to check queue and cause software if queue is not empty
-	*/
-	if(queueIsEmpty(q)){
-		enQueue(q, next_floor);
-		gotoNextFloor(deQueue(q)->key);
-	}else{
-		enQueue(q, next_floor);
-	}
-	
+	detectAndMove();
 }
 
 
